@@ -7,9 +7,9 @@ using System.Web;
 
 namespace Memmberships.Entities
 {
-    [Table("ProductItem")]
+    [Table("SubscriptionProduct")]
 
-    public class ProductItem
+    public class SubscriptionProduct
     {
         [Required]
         [Key, Column (Order =1)]
@@ -19,7 +19,7 @@ namespace Memmberships.Entities
         //Order = 1 or 2 
         [Required]
         [Key, Column(Order = 2)]
-        public int ItemId { get; set; }
+        public int SubscriptionId { get; set; }
 
 
         //Entity should not create a table in database
@@ -28,7 +28,7 @@ namespace Memmberships.Entities
         public int OldProductId { get; set; }
 
         [NotMapped]
-        public int OldItemId { get; set; }
+        public int OldSubscriptionId { get; set; }
 
 
       
