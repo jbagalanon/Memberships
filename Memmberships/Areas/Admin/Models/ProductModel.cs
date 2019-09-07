@@ -24,9 +24,10 @@ namespace Memmberships.Areas.Admin.Models
         [MaxLength(1024)]
         public string ImageUrl { get; set; }
 
-
+        [DisplayName("Product Link Text")]
         public int ProductLinkTextId { get; set; }
 
+        [DisplayName("Product Type")]
         public int ProductTypeId { get; set; }
 
 
