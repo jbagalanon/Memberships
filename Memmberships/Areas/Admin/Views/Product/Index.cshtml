@@ -20,7 +20,14 @@
         </th>
 
         <th>
+            @Html.DisplayNameFor(model => model.ProductLinkTexts)
+            (@{@Html.DisplayNameFor(model => model.ProductLinkTextId)})
+        </th>
+
+
+        <th>
             @Html.DisplayNameFor(model => model.ProductType)
+            (@{@Html.DisplayNameFor(model => model.ProductType)})
         </th>
 
           
@@ -34,18 +41,17 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
-        </td>   \]
+        </td>   
         
         <td>
-            @Html.DisplayFor(modelItem => item.HTML)
+            @Html.DisplayFor(modelItem => item.ProductLinkTexts)
+            (@{@Html.DisplayFor(modelItem => item.ProductLinkTextId)})
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WaitDays)
+            @Html.DisplayFor(modelItem => item.ProductTypes)
+            (@{@Html.DisplayFor(modelItem => item.ProductTypeId)})
         </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.IsFree)
-        </td>
         @Html.Partial("_TableButtonPartial",
             new SmallButtonModel { Id = item.Id })
     </tr>

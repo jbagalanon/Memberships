@@ -31,7 +31,7 @@ namespace Memmberships.Areas.Admin.Models
 
 
         //This will be added in products module
-        public ICollection <ProductLinkText>  ProductLinkText { get; set; }
+        public ICollection <ProductLinkText>  ProductLinkTexts { get; set; }
 
 
         public ICollection<ProductType>ProductTypes { get; set; }
@@ -49,9 +49,8 @@ namespace Memmberships.Areas.Admin.Models
         {
             get
             {
-                return ProductLinkText == null || ProductLinkText.Count.Equals(0) ?
-                    String.Empty : ProductLinkText.First(
-                        pt => pt.Id.Equals(ProductLinkTextId)).Title;
+                return ProductLinkTexts == null || ProductLinkTexts.Count.Equals(0) ?
+                    String.Empty : ProductLinkTexts.First(pt => pt.Id.Equals(ProductLinkTextId)).Title;
             }
         }
 
