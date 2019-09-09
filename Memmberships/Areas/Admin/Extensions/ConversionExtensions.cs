@@ -17,7 +17,8 @@ namespace Memmberships.Areas.Admin.Extensions
             
             this IEnumerable <Product> products, ApplicationDbContext db)
         {
-            if (products.Count().Equals(0)) return new List<ProductModel>();
+            if (products.Count().Equals(0))
+                return new List<ProductModel>();
 
             var texts = await db.ProductLinkTexts.ToListAsync();
             var types = await db.ProductTypes.ToListAsync();
@@ -29,11 +30,12 @@ namespace Memmberships.Areas.Admin.Extensions
                        Title = p.Title,
                        Description = p.Description,
                        ImageUrl = p.ImageUrl,
-                       ProductTypeId = p.ProductTypeId,
                        ProductLinkTextId = p.ProductLinkTextId,
+                       ProductTypeId = p.ProductTypeId,
+                       ProductLinkTexts= texts,
                        ProductTypes = types
                    };
         }
-
+         
     }
 }

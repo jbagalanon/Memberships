@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Memmberships.Entities;
 using Memmberships.Models;
 using Memmberships.Areas.Admin.Extensions;
+using Memmberships.Areas.Admin.Models;
 
 namespace Memmberships.Areas.Admin.Controllers
 {
@@ -21,8 +22,8 @@ namespace Memmberships.Areas.Admin.Controllers
         public async Task<ActionResult> Index()
         {
             var products = await db.Products.ToListAsync();
-            var model = products.Convert(db);
-            return View(model.Result);
+            var model = await products.Convert(db);
+            return View(model);
         }
 
         // GET: Admin/Product/Details/5
@@ -34,16 +35,21 @@ namespace Memmberships.Areas.Admin.Controllers
             }
             Product product = await db.Products.FindAsync(id);
             if (product == null)
-            {
+            { 
                 return HttpNotFound();
             }
             return View(product);
         }
 
         // GET: Admin/Product/Create
-        public ActionResult Create()
+        public async Task <ActionResult> Create()
         {
-            return View();
+            var model = new ProductModel
+            {
+                ProductLinkTexts = await db.ProductLinkTexts.ToListAsync(),
+                ProductTypes = await db.ProductTypes.ToListAsync(),
+            };
+            return View(model);
         }
 
         // POST: Admin/Product/Create

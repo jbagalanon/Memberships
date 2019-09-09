@@ -41,8 +41,9 @@ namespace Memmberships.Areas.Admin.Models
         {
             get
             {
-                return ProductType == null || ProductTypes.Count.Equals(0) ?
-                    String.Empty : ProductTypes.First(pt => pt.Id.Equals(ProductTypeId)).Title;
+                return ProductTypes == null || ProductTypes.Count.Equals(0) ?
+                    String.Empty : ProductTypes.First(
+                        pt => pt.Id.Equals(ProductTypeId)).Title;
             }
         }
 
