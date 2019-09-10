@@ -38,7 +38,8 @@ namespace Memmberships.Areas.Admin.Controllers
             { 
                 return HttpNotFound();
             }
-            return View(product);
+            var model = await product.Convert(db);  
+            return View(model);
         }
 
         // GET: Admin/Product/Create
@@ -81,7 +82,11 @@ namespace Memmberships.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+
+            var prod = new List<Product>();
+            prod.Add(product);
+            var ProductModel = await prod.Convert(db);
+            return View(ProductModel.First());
         }
 
         // POST: Admin/Product/Edit/5
@@ -97,9 +102,14 @@ namespace Memmberships.Areas.Admin.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
+     
             return View(product);
+
+           
         }
 
+ 
         // GET: Admin/Product/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
@@ -112,7 +122,12 @@ namespace Memmberships.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+
+
+            var model = await product.Convert(db);
+            return View(model);
+
+         
         }
 
         // POST: Admin/Product/Delete/5
