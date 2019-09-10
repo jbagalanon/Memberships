@@ -13,8 +13,7 @@ namespace Memmberships.Areas.Admin.Extensions
 {
     public static class ConversionExtensions
     {
-        public static async Task<IEnumerable<ProductModel>> Convert (
-            
+        public static async Task<IEnumerable<ProductModel>> Convert (            
             this IEnumerable <Product> products, ApplicationDbContext db)
         {
             if (products.Count().Equals(0))
@@ -64,10 +63,52 @@ namespace Memmberships.Areas.Admin.Extensions
 
             return model;
 
+
+             
+
         }
 
-  
+                
+        public static async Task<IEnumerable<ProductItemModel>> Convert(
+         this IQueryable<ProductItem> productItems, ApplicationDbContext db)
+        {
+            if (productItems.Count().Equals(0))
+                return new List<ProductItemModel>();
 
-    
+            return await (from pi in productItems
+                          select new ProductItemModel
+                          {
+                              ItemId = pi.ItemId,
+                              ProductId = pi.ProductId,
+                              ItemTitle = db.Items.FirstOrDefault(
+                                  i=> i.Id.Equals(pi.ItemId)).Title,
+
+                              ProductTitle = db.Items.FirstOrDefault(
+                                  i => i.Id.Equals(pi.ProductId)).Title
+
+                          }).ToListAsync();
+        }
+
+
+        public static async Task<ProductItemModel> Convert(
+           this ProductItem productItem, ApplicationDbContext db)
+        {
+
+            
+            var model = new ProductItemModel
+            {
+                 ItemId = productItem.ItemId,
+                 ProductId = productItem.ProductId, 
+
+                 Items = await db.Items.ToListAsync(),
+                 Products = await db.Products.ToListAsync()
+            };
+
+            return model;
+
+
+
+
+        }
     }
 }

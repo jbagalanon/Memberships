@@ -7,20 +7,21 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Memmberships.Areas.Admin.Extensions;
 using Memmberships.Areas.Admin.Models;
 using Memmberships.Entities;
 using Memmberships.Models;
 
 namespace Memmberships.Areas.Admin.Controllers
 {
-    public class ProductItemController : Controller
+    public class ProductItemController :  Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/ProductItem
-        public ActionResult Index()
+        public async Task <ActionResult> Index()
         {
-            return View(db.ProductItems.ToList());
+            return View(await db.ProductItems.Convert(db));
         }
 
         // GET: Admin/ProductItem/Details/5
