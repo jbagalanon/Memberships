@@ -34,7 +34,7 @@ namespace Memmberships.Areas.Admin.Extensions
                        ProductTypeId = p.ProductTypeId,
                        ProductLinkTexts= texts,
                        ProductTypes = types
-                   };
+                   }; 
         }
 
         public static async Task<ProductModel> Convert(
