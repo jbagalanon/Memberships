@@ -68,18 +68,18 @@ namespace Memmberships.Areas.Admin.Controllers
         }
 
         // GET: Admin/ProductItem/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? itemId, int? productId)
         {
-            if (id == null)
+            if (itemId == null || productId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductItem productItem = db.ProductItems.Find(id);
+            ProductItem productItem = await GetProductItem(itemId, productId);
             if (productItem == null)
             {
                 return HttpNotFound();
             }
-            return View(productItem);
+            return View(await productItem.Convert(db));
         }
 
         // POST: Admin/ProductItem/Edit/5
@@ -122,6 +122,23 @@ namespace Memmberships.Areas.Admin.Controllers
             db.ProductItems.Remove(productItem);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private async Task<ProductItem> GetProductItem (
+            int? itemId, int? productId)
+        {
+            try
+            {
+                int itmId = 0, prdId = 0;
+                int.TryParse(itmId.ToString(), out itmId);
+                int.TryParse(productId.ToString(), out prdId);
+
+                var productItem = await db.ProductItems.FirstOrDefaultAsync(
+                    pi => pi.ProductId.Equals(prdId) && pi.ItemId.Equals(itmId));
+
+                return productItem;
+            }
+            catch { return null; }
         }
 
         protected override void Dispose(bool disposing)

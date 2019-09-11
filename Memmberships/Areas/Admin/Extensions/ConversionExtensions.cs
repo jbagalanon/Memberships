@@ -92,9 +92,7 @@ namespace Memmberships.Areas.Admin.Extensions
 
         public static async Task<ProductItemModel> Convert(
            this ProductItem productItem, ApplicationDbContext db)
-        {
-
-            
+        {                      
             var model = new ProductItemModel
             {
                  ItemId = productItem.ItemId,
@@ -103,12 +101,14 @@ namespace Memmberships.Areas.Admin.Extensions
                  Items = await db.Items.ToListAsync(),
                  Products = await db.Products.ToListAsync()
             };
-
-            return model;
-
-
-
-
+                return model;
+                        
         }
+
+        public static async Task <bool> CanChange (this ProductItem productItem,  ApplicationDbContext db)
+        {
+            var oldPI = await db.ProductItems.CountAsync(pi => pi.ProductId.Equals(o))
+        }
+
     }
 }
