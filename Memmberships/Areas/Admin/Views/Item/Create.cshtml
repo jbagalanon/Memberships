@@ -78,7 +78,7 @@
             @Html.LabelFor(model => model.Sections, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.SectionId,
-               Model.ItemTypes.ToSelectListItem(Model.SectionId),
+               Model.Sections.ToSelectListItem(Model.SectionId),
                 new { @class = "form-control"})
                 @Html.ValidationMessageFor(model => model.SectionId, "", new { @class = "text-danger" })
             </div>
@@ -88,7 +88,7 @@
             @Html.LabelFor(model => model.Parts, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.PartId,
-               Model.ItemTypes.ToSelectListItem(Model.PartId),
+               Model.Parts.ToSelectListItem(Model.PartId),
                 new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PartId, "", new { @class = "text-danger" })
             </div>

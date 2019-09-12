@@ -87,12 +87,15 @@ namespace Memmberships.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ItemId")] ProductItem productItem)
+        public async Task<ActionResult>Edit([Bind(Include = "ProductId,ItemId, ProductId,ItemId")]
+        ProductItem productItem)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(productItem).State = EntityState.Modified;
-                db.SaveChanges();
+
+                var canChange = await productItem.CanChange(db);
+                if (canChange)
+                    await productItem.Change(db);
                 return RedirectToAction("Index");
             }
             return View(productItem);
