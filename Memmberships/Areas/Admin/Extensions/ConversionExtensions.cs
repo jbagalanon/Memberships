@@ -65,8 +65,7 @@ namespace Memmberships.Areas.Admin.Extensions
             return model;             
 
         }
-
-                
+                        
         public static async Task<IEnumerable<ProductItemModel>> Convert(
          this IQueryable<ProductItem> productItems, ApplicationDbContext db)
         {
@@ -86,18 +85,24 @@ namespace Memmberships.Areas.Admin.Extensions
 
                           }).ToListAsync();
         }
-
-
+        
         public static async Task<ProductItemModel> Convert(
-           this ProductItem productItem, ApplicationDbContext db)
+           this ProductItem productItem, ApplicationDbContext db,
+           bool addListData=true)
         {                      
             var model = new ProductItemModel
             {
                  ItemId = productItem.ItemId,
                  ProductId = productItem.ProductId, 
 
-                 Items = await db.Items.ToListAsync(),
-                 Products = await db.Products.ToListAsync()
+                 Items = addListData ? await db.Items.ToListAsync() :null,
+                 Products = addListData ? await db.Products.ToListAsync() : null,
+
+                 ItemTitle = (await db.Items.FirstOrDefaultAsync(i => 
+                 i.Id.Equals(productItem.ItemId))).Title,
+                 
+                 ProductTitle = (await db.Products.FirstOrDefaultAsync(p =>
+                 p.Id.Equals(productItem.ProductId))).Title
             };
                 return model;
                         
@@ -105,11 +110,13 @@ namespace Memmberships.Areas.Admin.Extensions
 
         public static async Task <bool> CanChange (this ProductItem productItem,  ApplicationDbContext db)
         {
-            var oldPI = await db.ProductItems.CountAsync(pi => pi.ProductId.Equals(
-                productItem.OldProductId) && pi.ItemId.Equals(productItem.OldItemId));
+            var oldPI = await db.ProductItems.CountAsync(pi =>
+                pi.ProductId.Equals(productItem.OldProductId) && 
+                pi.ItemId.Equals(productItem.OldItemId));
 
-            var newPI = await db.ProductItems.CountAsync(pi => pi.ProductId.Equals(
-               productItem.ProductId) && pi.ItemId.Equals(productItem.ItemId));
+            var newPI = await db.ProductItems.CountAsync(pi =>  
+                pi.ProductId.Equals(productItem.ProductId) && 
+                pi.ItemId.Equals(productItem.ItemId));
 
             return oldPI.Equals(1) && newPI.Equals(0);
         }

@@ -36,7 +36,8 @@ namespace Memmberships.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(productItem);
+
+            return View(await productItem.Convert(db));
         }
 
         // GET: Admin/ProductItem/Create
@@ -79,7 +80,7 @@ namespace Memmberships.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(productItem);
+            return View(await productItem.Convert(db));
         }
 
         // POST: Admin/ProductItem/Edit/5
@@ -87,12 +88,11 @@ namespace Memmberships.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult>Edit([Bind(Include = "ProductId,ItemId, ProductId,ItemId")]
+        public async Task<ActionResult>Edit([Bind(Include = "ProductId,ItemId, OldProductId, OldItemId")]
         ProductItem productItem)
         {
             if (ModelState.IsValid)
             {
-
                 var canChange = await productItem.CanChange(db);
                 if (canChange)
                     await productItem.Change(db);
@@ -127,13 +127,13 @@ namespace Memmberships.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        private async Task<ProductItem> GetProductItem (
+        private async Task<ProductItem>  GetProductItem (
             int? itemId, int? productId)
         {
             try
             {
                 int itmId = 0, prdId = 0;
-                int.TryParse(itmId.ToString(), out itmId);
+                int.TryParse(itemId.ToString(), out itmId);
                 int.TryParse(productId.ToString(), out prdId);
 
                 var productItem = await db.ProductItems.FirstOrDefaultAsync(
