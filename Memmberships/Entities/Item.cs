@@ -26,7 +26,7 @@ namespace Memmberships.Entities
         [MaxLength(1024)]
         public string Url { get; set; }
 
-        [DisplayName("Image URL")]
+        [DisplayName("Image URL")] 
         [MaxLength(1024)]
         public string ImageUrl { get; set; }
 
