@@ -25,13 +25,13 @@ namespace Memmberships.Areas.Admin.Controllers
         }
 
         // GET: Admin/ProductItem/Details/5
-        public ActionResult Details(int? id)
+        public async Task <ActionResult> Details(int? itemId, int? productId)
         {
-            if (id == null)
+            if (itemId == null ||productId==null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductItem productItem = db.ProductItems.Find(id);
+            ProductItem productItem = await GetProductItem(itemId,productId);
             if (productItem == null)
             {
                 return HttpNotFound();
@@ -79,7 +79,7 @@ namespace Memmberships.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(await productItem.Convert(db));
+            return View(productItem);
         }
 
         // POST: Admin/ProductItem/Edit/5

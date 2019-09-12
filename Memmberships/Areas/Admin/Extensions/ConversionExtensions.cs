@@ -62,10 +62,7 @@ namespace Memmberships.Areas.Admin.Extensions
             model.ProductLinkTexts.Add(text);
             model.ProductTypes.Add(type);
 
-            return model;
-
-
-             
+            return model;             
 
         }
 
@@ -85,7 +82,7 @@ namespace Memmberships.Areas.Admin.Extensions
                                   i=> i.Id.Equals(pi.ItemId)).Title,
 
                               ProductTitle = db.Items.FirstOrDefault(
-                                  i => i.Id.Equals(pi.ProductId)).Title
+                                  p => p.Id.Equals(pi.ProductId)).Title
 
                           }).ToListAsync();
         }
