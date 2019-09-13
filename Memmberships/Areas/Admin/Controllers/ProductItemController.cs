@@ -102,28 +102,28 @@ namespace Memmberships.Areas.Admin.Controllers
         }
 
         // GET: Admin/ProductItem/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? itemId, int? productId)
         {
-            if (id == null)
+            if (itemId == null || productId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductItem productItem = db.ProductItems.Find(id);
+            ProductItem productItem = await GetProductItem(itemId, productId);
             if (productItem == null)
             {
                 return HttpNotFound();
             }
-            return View(productItem);
+            return View(await productItem.Convert(db));
         }
 
         // POST: Admin/ProductItem/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task <ActionResult> DeleteConfirmed(int itemId, int productId)
         {
-            ProductItem productItem = db.ProductItems.Find(id);
+            ProductItem productItem = await GetProductItem(itemId,productId);
             db.ProductItems.Remove(productItem);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
