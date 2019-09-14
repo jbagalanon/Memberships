@@ -224,19 +224,19 @@ namespace Memmberships.Areas.Admin.Extensions
         public static async Task Change(
             this SubscriptionProduct subscriptionProduct, ApplicationDbContext db)
         {
-            var oldProductItem = await db.ProductItems.FirstOrDefaultAsync(
+            var oldSubscritionProduct = await db.SubscriptionProducts.FirstOrDefaultAsync(
                 pi => pi.ProductId.Equals(subscriptionProduct.OldProductId) &&
-                pi.ItemId.Equals(subscriptionProduct.OldSubscriptionId));
+                pi.SubscriptionId.Equals(subscriptionProduct.OldSubscriptionId));
 
-            var newProductItem = await db.ProductItems.FirstOrDefaultAsync(
+            var newSubscriptionProduct = await db.SubscriptionProducts.FirstOrDefaultAsync(
                pi => pi.ProductId.Equals(subscriptionProduct.ProductId) &&
-               pi.ItemId.Equals(subscriptionProduct.SubscriptionId));
+               pi.SubscriptionId.Equals(subscriptionProduct.SubscriptionId));
 
-            if (oldProductItem != null && newProductItem == null)
+            if (oldSubscritionProduct != null && newSubscriptionProduct == null)
             {
-                newProductItem = new ProductItem
+                newSubscriptionProduct = new SubscriptionProduct
                 {
-                    ItemId = subscriptionProduct.SubscriptionId,
+                    SubscriptionId = subscriptionProduct.SubscriptionId,
                     ProductId = subscriptionProduct.ProductId
                 };
 
@@ -245,8 +245,8 @@ namespace Memmberships.Areas.Admin.Extensions
                 {
                     try
                     {
-                        db.ProductItems.Remove(oldProductItem);
-                        db.ProductItems.Add(newProductItem);
+                        db.SubscriptionProducts.Remove(oldSubscritionProduct);
+                        db.SubscriptionProducts.Add(newSubscriptionProduct);
 
                         await db.SaveChangesAsync();
                         transaction.Complete();

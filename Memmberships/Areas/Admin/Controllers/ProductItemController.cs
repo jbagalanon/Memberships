@@ -132,7 +132,8 @@ namespace Memmberships.Areas.Admin.Controllers
         {
             try
             {
-                int itmId = 0, prdId = 0;
+                int itmId = 0;
+                int prdId = 0;
                 int.TryParse(itemId.ToString(), out itmId);
                 int.TryParse(productId.ToString(), out prdId);
 
