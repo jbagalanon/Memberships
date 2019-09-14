@@ -43,7 +43,7 @@ namespace Memmberships.Areas.Admin.Controllers
         // GET: Admin/ProductItem/Create
         public async Task<ActionResult> Create()
         {
-            var model = new SubscriptionProductModel
+            var model = new ProductItemModel
             {
                 Items = await db.Items.ToListAsync(),
                 Products = await db.Products.ToListAsync()

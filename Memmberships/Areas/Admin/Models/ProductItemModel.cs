@@ -7,7 +7,7 @@ using Memmberships.Entities;
 
 namespace Memmberships.Areas.Admin.Models
 {
-    public class SubscriptionProductModel
+    public class ProductItemModel
     {
 
         [DisplayName ("Product Id")]
