@@ -36,7 +36,7 @@ namespace Memmberships.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(subscriptionProduct.Convert(db));
+            return View(await subscriptionProduct.Convert(db));
         }
 
         // GET: Admin/SubscriptionProduct/Create
@@ -80,7 +80,7 @@ namespace Memmberships.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(subscriptionProduct.Convert(db));
+            return View(await subscriptionProduct.Convert(db));
         }
 
         // POST: Admin/SubscriptionProduct/Edit/5
@@ -113,7 +113,7 @@ namespace Memmberships.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(subscriptionProduct.Convert(db));
+            return View(await subscriptionProduct.Convert(db));
         }
 
         // POST: Admin/SubscriptionProduct/Delete/5
@@ -132,8 +132,8 @@ namespace Memmberships.Areas.Admin.Controllers
         {
             try
             {
-                int subscID = 0;
-                int prdId = 0;
+                int subscID;
+                int prdId; 
                 int.TryParse(subscriptionId.ToString(), out subscID);
                 int.TryParse(productId.ToString(), out prdId);
 

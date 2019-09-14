@@ -176,7 +176,7 @@ namespace Memmberships.Areas.Admin.Extensions
                           {
                               SubscriptionId = pi.SubscriptionId,
                               ProductId = pi.ProductId,
-                              SubscritionTitle= db.Items.FirstOrDefault(
+                              SubscritionTitle= db.Subscriptions.FirstOrDefault(
                                   i => i.Id.Equals(pi.SubscriptionId)).Title,
 
                               ProductTitle = db.Products.FirstOrDefault(
