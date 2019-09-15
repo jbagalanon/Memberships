@@ -11,12 +11,12 @@ namespace Memmberships.Models
 
        
         [Display(Name ="User Id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        public int Email { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [EmailAddress]
