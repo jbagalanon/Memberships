@@ -14,6 +14,9 @@ using Memmberships.Areas.Admin.Models;
 
 namespace Memmberships.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
+
     public class ProductController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

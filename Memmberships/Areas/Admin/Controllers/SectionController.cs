@@ -12,8 +12,12 @@ using Memmberships.Models;
 
 namespace Memmberships.Areas.Admin.Controllers
 {
+
+
+    [Authorize(Roles = "Admin")]
     public class SectionController : Controller
-    {
+    {             
+
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/Section

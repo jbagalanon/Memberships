@@ -11,6 +11,9 @@ using Memmberships.Models;
 
 namespace Memmberships.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
+
     public class SubscriptionController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
