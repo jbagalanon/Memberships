@@ -10,24 +10,45 @@
             Action = "Edit",
             ButtonType = "btn-primary",
             Glyph = "pencil",
-            Text ="Edit Button",
+            Text = "Edit Button",
             Id = Model.Id,
             ItemId = Model.ItemId,
-            SubscriptionId = Model.SubscriptionId
-        } )
-
-
-        @Html.Partial("_SmallButtonPartial",
-        new SmallButtonModel
-        {
-            Action = "Details",
-            ButtonType = "btn-success",
-            Glyph = "list",
-            Text = "Details Button",
-            Id = Model.Id,
-            ItemId = Model.ItemId,
-            SubscriptionId = Model.SubscriptionId
+            SubscriptionId = Model.SubscriptionId,
+            UserId = Model.UserId
         })
+
+        @if (Model.UserId == null || Model.UserId.Equals(string.Empty))
+        {
+
+            @Html.Partial("_SmallButtonPartial",
+                 new SmallButtonModel
+                 {
+                     Action = "Details",
+                     ButtonType = "btn-success",
+                     Glyph = "list",
+                     Text = "Details Button",
+                     Id = Model.Id,
+                     ItemId = Model.ItemId,
+                     SubscriptionId = Model.SubscriptionId,
+                     UserId = Model.UserId
+                 })
+        }
+
+        @if (Model.UserId != null && !Model.UserId.Equals(string.Empty))
+        {
+            @Html.Partial("_SmallButtonPartial",
+                   new SmallButtonModel
+                   {
+                       Action = "Subsciptions",
+                       ButtonType = "btn-info",
+                       Glyph = "list",
+                       Text = "Subscriptions",
+                       Id = Model.Id,
+                       ItemId = Model.ItemId,
+                       SubscriptionId = Model.SubscriptionId,
+                       UserId = Model.UserId
+                   })
+        }
 
         @Html.Partial("_SmallButtonPartial",
         new SmallButtonModel
@@ -38,7 +59,8 @@
             Text = "Delete Button",
             Id = Model.Id,
             ItemId = Model.ItemId,
-            SubscriptionId = Model.SubscriptionId
+            SubscriptionId = Model.SubscriptionId,
+            UserId = Model.UserId
         })
 
 
@@ -51,5 +73,5 @@
 
 
 
-         
+
     </div>
