@@ -36,6 +36,7 @@
 
         @if (Model.UserId != null && !Model.UserId.Equals(string.Empty))
         {
+
             @Html.Partial("_SmallButtonPartial",
                    new SmallButtonModel
                    {
@@ -61,13 +62,8 @@
             ItemId = Model.ItemId,
             SubscriptionId = Model.SubscriptionId,
             UserId = Model.UserId
+
         })
-
-
-
-
-
-
 
 
 

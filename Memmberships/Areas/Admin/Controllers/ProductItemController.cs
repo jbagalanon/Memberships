@@ -59,7 +59,7 @@ namespace Memmberships.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,ItemId")] ProductItem productItem)
+        public ActionResult Create([Bind(Include = "ProductId, ItemId")] ProductItem productItem)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace Memmberships.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult>Edit([Bind(Include = "ProductId,ItemId, OldProductId, OldItemId")]
+        public async Task<ActionResult>Edit([Bind(Include = "ProductId, ItemId, OldProductId, OldItemId")]
         ProductItem productItem)
         {
             if (ModelState.IsValid)
@@ -135,11 +135,9 @@ namespace Memmberships.Areas.Admin.Controllers
         {
             try
             {
-                int itmId = 0;
-                int prdId = 0;
+                int itmId = 0, prdId = 0;
                 int.TryParse(itemId.ToString(), out itmId);
                 int.TryParse(productId.ToString(), out prdId);
-
                 var productItem = await db.ProductItems.FirstOrDefaultAsync(
                     pi => pi.ProductId.Equals(prdId) && pi.ItemId.Equals(itmId));
 
