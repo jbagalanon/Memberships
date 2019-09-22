@@ -18,7 +18,7 @@ namespace Memmberships.Areas.Admin.Controllers
     public class ProductLinkTextController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        //find the match controller of this database, something wrong with this database
         // GET: Admin/ProductLinkText
         public async Task<ActionResult> Index()
         {
