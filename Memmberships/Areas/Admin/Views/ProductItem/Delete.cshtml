@@ -23,13 +23,16 @@
     {
         @Html.AntiForgeryToken()
 
-<div class="form-actions no-color">
-    <input type="submit" value="Delete" class="btn btn-danger" />
-    @Html.Partial("_EditButtonDetailPartial", new EditButtonModel{ItemId = Model.ItemId,
-            ProductId = Model.ProductId})
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            @Html.Partial("_EditButtonDetailPartial", new EditButtonModel
+            {
+                ItemId = Model.ItemId,
+                    ProductId = Model.ProductId
+            })
 
-    @Html.Partial("_BackToListButtonPartial")
+            @Html.Partial("_BackToListButtonPartial")
 
-</div>
+        </div>
     }
 </div>

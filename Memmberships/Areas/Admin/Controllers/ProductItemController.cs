@@ -17,24 +17,24 @@ namespace Memmberships.Areas.Admin.Controllers
 
     [Authorize(Roles = "Admin")]
 
-    public class ProductItemController :  Controller
+    public class ProductItemController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/ProductItem
-        public async Task <ActionResult> Index()
+        public async Task<ActionResult> Index()
         {
             return View(await db.ProductItems.Convert(db));
         }
 
         // GET: Admin/ProductItem/Details/5
-        public async Task <ActionResult> Details(int? itemId, int? productId)
+        public async Task<ActionResult> Details(int? itemId, int? productId)
         {
-            if (itemId == null ||productId==null)
+            if (itemId == null || productId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductItem productItem = await GetProductItem(itemId,productId);
+            ProductItem productItem = await GetProductItem(itemId, productId);
             if (productItem == null)
             {
                 return HttpNotFound();
@@ -91,7 +91,7 @@ namespace Memmberships.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult>Edit([Bind(Include = "ProductId, ItemId, OldProductId, OldItemId")]
+        public async Task<ActionResult> Edit([Bind(Include = "ProductId, ItemId, OldProductId, OldItemId")]
         ProductItem productItem)
         {
             if (ModelState.IsValid)
@@ -122,15 +122,15 @@ namespace Memmberships.Areas.Admin.Controllers
         // POST: Admin/ProductItem/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task <ActionResult> DeleteConfirmed(int itemId, int productId)
+        public async Task<ActionResult> DeleteConfirmed(int itemId, int productId)
         {
-            ProductItem productItem = await GetProductItem(itemId,productId);
+            ProductItem productItem = await GetProductItem(itemId, productId);
             db.ProductItems.Remove(productItem);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private async Task<ProductItem>  GetProductItem (
+        private async Task<ProductItem> GetProductItem(
             int? itemId, int? productId)
         {
             try

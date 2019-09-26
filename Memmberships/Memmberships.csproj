@@ -243,6 +243,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UserSubscriptionModel.cs" />
+    <Compile Include="Models\UserSubscriptionViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -320,17 +322,17 @@
     <Content Include="Areas\Admin\Views\Subscription\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Subscription\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Subscription\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductItem\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductItem\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductItem\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductItem\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductItem\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_EditButtonDetailPartial.cshtml" />
     <Content Include="Areas\Admin\Views\SubscriptionProduct\Create.cshtml" />
     <Content Include="Areas\Admin\Views\SubscriptionProduct\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\SubscriptionProduct\Details.cshtml" />
     <Content Include="Areas\Admin\Views\SubscriptionProduct\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\SubscriptionProduct\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductItem\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductItem\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductItem\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductItem\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductItem\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -385,6 +387,7 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\Account\Subscriptions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
