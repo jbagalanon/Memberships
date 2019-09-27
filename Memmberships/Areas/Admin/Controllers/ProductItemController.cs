@@ -59,12 +59,13 @@ namespace Memmberships.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId, ItemId")] ProductItem productItem)
+        public async Task <ActionResult> Create(
+            [Bind(Include = "ProductId, ItemId")] ProductItem productItem)
         {
             if (ModelState.IsValid)
             {
                 db.ProductItems.Add(productItem);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -91,14 +92,16 @@ namespace Memmberships.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ProductId, ItemId, OldProductId, OldItemId")]
-        ProductItem productItem)
+        public async Task<ActionResult> Edit(
+            [Bind(Include = "ProductId, ItemId, OldProductId, OldItemId")]
+            ProductItem productItem)
         {
             if (ModelState.IsValid)
             {
                 var canChange = await productItem.CanChange(db);
                 if (canChange)
                     await productItem.Change(db);
+
                 return RedirectToAction("Index");
             }
             return View(productItem);
