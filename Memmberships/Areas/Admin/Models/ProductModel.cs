@@ -51,8 +51,10 @@ namespace Memmberships.Areas.Admin.Models
         {
             get
             {
-                return ProductLinkTexts == null || ProductLinkTexts.Count.Equals(0) ?
-                    String.Empty : ProductLinkTexts.First(pt => pt.Id.Equals(ProductLinkTextId)).Title;
+                return ProductLinkTexts == null ||
+                    ProductLinkTexts.Count.Equals(0) ?
+                    String.Empty : ProductLinkTexts.First(
+                        pt => pt.Id.Equals(ProductLinkTextId)).Title;
             }
         }
 
